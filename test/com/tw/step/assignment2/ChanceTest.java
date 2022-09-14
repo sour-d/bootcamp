@@ -5,13 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChanceTest {
-
-    @Test
-    void shouldReturnChance() {
-        Chance chanceOfTail = new Chance(0.5);
-        assertEquals(0.5, chanceOfTail.getChance(), 0.1);
-    }
-
     @Test
     void shouldReturnChanceOfOppositeEvent() {
         Chance chance = new Chance(0.6);
@@ -22,10 +15,10 @@ class ChanceTest {
     }
 
     @Test
-    void shouldReturnChanceForTwoCoin() {
+    void shouldReturnChanceForTwoConsecutiveChances() {
         Chance chance = new Chance(0.6);
         Chance anotherChance = new Chance(0.6);
-        Chance chancesOfTwoEvents = chance.chanceOfTwoEvents(anotherChance);
+        Chance chancesOfTwoEvents = Chance.chanceOfTwoConsecutiveChances(chance, anotherChance);
 
         Chance expectedChance = new Chance(0.36);
 
@@ -33,10 +26,10 @@ class ChanceTest {
     }
 
     @Test
-    void chanceOfAtLeastOneTails() {
+    void chanceOfAtLeastOneChance() {
         Chance chance = new Chance(0.6);
         Chance anotherChance = new Chance(0.6);
-        Chance chancesOfTwoEvents = chance.chanceOfAtLeastOneEvent(anotherChance);
+        Chance chancesOfTwoEvents = Chance.chanceOfAtLeastChance(chance, anotherChance);
 
         Chance expectedChance = new Chance(0.84);
 

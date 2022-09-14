@@ -15,17 +15,17 @@ public class Chance {
         return new Chance(1 - this.chance);
     }
 
-    public Chance chanceOfTwoEvents(Chance otherEvent) {
-        return new Chance(this.chance * otherEvent.getChance());
+    public static Chance chanceOfTwoConsecutiveChances(Chance chance1, Chance chance2) {
+        double finalChance = chance1.getChance() * chance2.getChance();
+        return new Chance(finalChance);
     }
 
-    public Chance chanceOfAtLeastOneEvent(Chance otherEvent) {
-        double probabilityOfFirstEvent = this.oppositeChance().getChance();
-        double probabilityOfSecondEvent = otherEvent.oppositeChance().getChance();
+    public static Chance chanceOfAtLeastChance(Chance chance1, Chance chance2) {
+        double probabilityOfFirstEvent = chance1.oppositeChance().getChance();
+        double probabilityOfSecondEvent = chance2.oppositeChance().getChance();
 
-        double chance = 1 - (probabilityOfFirstEvent * probabilityOfSecondEvent);
-
-        return new Chance(chance);
+        double finalChance = 1 - (probabilityOfFirstEvent * probabilityOfSecondEvent);
+        return new Chance(finalChance);
     }
 
     @Override

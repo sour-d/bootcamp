@@ -9,16 +9,20 @@ public class Coin {
         this.totalTails = totalTails;
     }
 
-    public double possibilityOfTail() {
+    public double chanceOfOneTail() {
         double numberOfPossibilities = this.totalTails + this.totalHeads;
         return this.totalTails / numberOfPossibilities;
     }
 
-    public double possibilityOfNotGettingTail() {
-        return 1 - this.possibilityOfTail();
+    public double chanceOfNotGettingOneTail() {
+        return 1 - this.chanceOfOneTail();
     }
 
-    public double possibilityOfTailWithOtherCoin(Coin coin) {
-        return this.possibilityOfTail() * coin.possibilityOfTail();
+    public double chanceOfTwoTails(Coin coin) {
+        return this.chanceOfOneTail() * coin.chanceOfOneTail();
+    }
+
+    public double chanceOfAtLeastOneTails(Coin coin) {
+        return 1 - (this.chanceOfNotGettingOneTail() * coin.chanceOfNotGettingOneTail());
     }
 }

@@ -8,12 +8,21 @@ class VolumeTest {
     @Test
     void shouldCompareGallonAndLitre() {
         Volume gallon = new Volume(1, VolumeUnit.GALLON);
-        Volume liter = new Volume(3.78, VolumeUnit.LITER);
+        Volume liter = new Volume(3.8, VolumeUnit.LITER);
         Volume liter1 = new Volume(3, VolumeUnit.LITER);
         Volume liter2 = new Volume(4, VolumeUnit.LITER);
 
         assertEquals(Outcome.EQUAL, gallon.compare(liter));
         assertEquals(Outcome.GREATER, gallon.compare(liter1));
         assertEquals(Outcome.LESSER, gallon.compare(liter2));
+    }
+
+    @Test
+    void shouldAddTwoVolumes() {
+        Volume gallon = new Volume(1, VolumeUnit.GALLON);
+        Volume liter = new Volume(1, VolumeUnit.LITER);
+        Volume expected = new Volume(4.8, VolumeUnit.LITER);
+
+        assertEquals(expected,gallon.add(liter));
     }
 }

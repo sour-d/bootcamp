@@ -1,7 +1,6 @@
 package com.tw.step.assignment3;
 
 import com.tw.step.assignment3.exception.InvalidMeasurementValueException;
-import com.tw.step.assignment3.exception.UnitMismatchException;
 
 public class Length {
     private final double length;
@@ -20,29 +19,19 @@ public class Length {
     }
 
     public Outcome compare(Length anotherLength) {
-        if (anotherLength.toInch() == this.toInch()) {
+        if (anotherLength.convertToBaseUnit() == this.convertToBaseUnit()) {
             return Outcome.EQUAL;
         }
-        if (this.toInch() > anotherLength.toInch()) return Outcome.GREATER;
+        if (this.convertToBaseUnit() > anotherLength.convertToBaseUnit()) return Outcome.GREATER;
         return Outcome.LESSER;
     }
 
-    public double toInch() {
-        double equivalent = 1;
-
-        switch (this.unit) {
-            case CM: equivalent = 0.4;
-                break;
-            case MM: equivalent = 0.04;
-                break;
-            case FT: equivalent = 12;
-                break;
-        }
-        return this.length * equivalent;
+    public double convertToBaseUnit() {
+        return this.unit.convertToBaseUnit(this.length);
     }
 
     public Length add(Length anotherLength) throws InvalidMeasurementValueException {
-        double sumOfLengths = this.toInch() + anotherLength.toInch();
+        double sumOfLengths = this.convertToBaseUnit() + anotherLength.convertToBaseUnit();
         return createLength(sumOfLengths, LengthUnit.IN);
     }
 

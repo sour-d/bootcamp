@@ -1,8 +1,6 @@
 package com.tw.step.assignment3;
 
-
 public class Length {
-
     private double length;
     private Unit unit;
 
@@ -11,21 +9,20 @@ public class Length {
         this.unit = unit;
     }
 
-    public int compare(Length anotherLength) {
-        if (Math.round(anotherLength.toMilliMeter()) == Math.round(this.toMilliMeter())){
-            return 0;
+    public Outcome compare(Length anotherLength) {
+        if (anotherLength.toMilliMeter() == this.toMilliMeter()){
+            return Outcome.EQUAL;
         }
-        if (this.toMilliMeter() > anotherLength.toMilliMeter()) return 1;
-        return -1;
+        if (this.toMilliMeter() > anotherLength.toMilliMeter()) return Outcome.GREATER;
+        return Outcome.LESSER;
     }
 
     public double toMilliMeter() {
         switch(unit){
             case CM: return this.length * 10;
-            case IN: return this.length * 25.4;
-            case FT: return this.length * 304.8;
+            case IN: return this.length * 25;
+            case FT: return this.length * 300;
             default: return this.length;
         }
     }
-
 }

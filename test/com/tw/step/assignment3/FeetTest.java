@@ -13,9 +13,9 @@ class FeetTest {
         Length inch2 = new Length(10,Unit.IN);
 
 
-        assertEquals(0,feet.compare(inch));
-        assertEquals(-1,feet.compare(inch1));
-        assertEquals(1,feet.compare(inch2));
+        assertEquals(Outcome.EQUAL,feet.compare(inch));
+        assertEquals(Outcome.GREATER,feet.compare(inch2));
+        assertEquals(Outcome.LESSER,feet.compare(inch1));
     }
 
     @Test
@@ -25,8 +25,9 @@ class FeetTest {
         Length centimeter1 = new Length(4,Unit.CM);
         Length centimeter2 = new Length(6,Unit.CM);
 
-        assertEquals(1,inch.compare(centimeter1));
-        assertEquals(-1,inch.compare(centimeter2));
+        assertEquals(Outcome.EQUAL,inch.compare(centimeter));
+        assertEquals(Outcome.GREATER,inch.compare(centimeter1));
+        assertEquals(Outcome.LESSER,inch.compare(centimeter2));
     }
 
     @Test
@@ -37,8 +38,21 @@ class FeetTest {
         Length millimeter2 = new Length(11,Unit.MM);
 
 
-        assertEquals(0,centimeter.compare(millimeter));
-        assertEquals(1,centimeter.compare(millimeter1));
-        assertEquals(-1,centimeter.compare(millimeter2));
+        assertEquals(Outcome.EQUAL,centimeter.compare(millimeter));
+        assertEquals(Outcome.GREATER,centimeter.compare(millimeter1));
+        assertEquals(Outcome.LESSER,centimeter.compare(millimeter2));
+    }
+
+    @Test
+    void shouldCompareMillimeterAndInch() {
+        Length millimeter = new Length(100,Unit.MM);
+        Length inch = new Length(4,Unit.IN);
+        Length inch1 = new Length(3,Unit.IN);
+        Length inch2 = new Length(5,Unit.IN);
+
+
+        assertEquals(Outcome.EQUAL,millimeter.compare(inch));
+        assertEquals(Outcome.GREATER,millimeter.compare(inch1));
+        assertEquals(Outcome.LESSER,millimeter.compare(inch2));
     }
 }

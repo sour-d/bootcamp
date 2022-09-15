@@ -1,16 +1,17 @@
 package com.tw.step.assignment3;
 
+import com.tw.step.assignment3.exception.InvalidMeasurementValueException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class VolumeTest {
     @Test
-    void shouldCompareGallonAndLitre() {
-        Volume gallon = new Volume(1, VolumeUnit.GALLON);
-        Volume liter = new Volume(3.8, VolumeUnit.LITER);
-        Volume liter1 = new Volume(3, VolumeUnit.LITER);
-        Volume liter2 = new Volume(4, VolumeUnit.LITER);
+    void shouldCompareGallonAndLitre() throws InvalidMeasurementValueException {
+        Volume gallon = Volume.createVolume(1, VolumeUnit.GALLON);
+        Volume liter = Volume.createVolume(3.8, VolumeUnit.LITER);
+        Volume liter1 = Volume.createVolume(3, VolumeUnit.LITER);
+        Volume liter2 = Volume.createVolume(4, VolumeUnit.LITER);
 
         assertEquals(Outcome.EQUAL, gallon.compare(liter));
         assertEquals(Outcome.GREATER, gallon.compare(liter1));
@@ -18,10 +19,10 @@ class VolumeTest {
     }
 
     @Test
-    void shouldAddTwoVolumes() {
-        Volume gallon = new Volume(1, VolumeUnit.GALLON);
-        Volume liter = new Volume(1, VolumeUnit.LITER);
-        Volume expected = new Volume(4.8, VolumeUnit.LITER);
+    void shouldAddTwoVolumes() throws InvalidMeasurementValueException {
+        Volume gallon = Volume.createVolume(1, VolumeUnit.GALLON);
+        Volume liter = Volume.createVolume(1, VolumeUnit.LITER);
+        Volume expected = Volume.createVolume(4.8, VolumeUnit.LITER);
 
         assertEquals(expected,gallon.add(liter));
     }

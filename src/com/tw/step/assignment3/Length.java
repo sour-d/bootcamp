@@ -1,14 +1,22 @@
 package com.tw.step.assignment3;
 
+import com.tw.step.assignment3.exception.InvalidMeasurementValueException;
 import com.tw.step.assignment3.exception.UnitMismatchException;
 
 public class Length {
     private final double length;
     private final LengthUnit unit;
 
-    public Length(double length, LengthUnit unit) {
+    private Length(double length, LengthUnit unit) {
         this.length = length;
         this.unit = unit;
+    }
+
+    public static Length createLength(double length, LengthUnit unit) throws InvalidMeasurementValueException {
+        if (length < 0){
+            throw new InvalidMeasurementValueException(length);
+        }
+        return new Length(length, unit);
     }
 
     public Outcome compare(Length anotherLength) {
@@ -33,9 +41,9 @@ public class Length {
         return this.length * equivalent;
     }
 
-    public Length add(Length anotherLength) throws UnitMismatchException {
+    public Length add(Length anotherLength) throws InvalidMeasurementValueException {
         double sumOfLengths = this.toInch() + anotherLength.toInch();
-        return new Length(sumOfLengths, LengthUnit.IN);
+        return createLength(sumOfLengths, LengthUnit.IN);
     }
 
     @Override

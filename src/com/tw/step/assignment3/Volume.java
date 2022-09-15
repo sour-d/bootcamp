@@ -1,31 +1,37 @@
 package com.tw.step.assignment3;
 
+import com.tw.step.assignment3.exception.InvalidMeasurementValueException;
+
 public class Volume {
 
     private final double volume;
     private final VolumeUnit unit;
 
-    public Volume(double volume, VolumeUnit unit) {
+    private Volume(double volume, VolumeUnit unit) {
         this.volume = volume;
         this.unit = unit;
     }
 
+    public static Volume createVolume(double volume, VolumeUnit unit) throws InvalidMeasurementValueException {
+        if (volume < 0){
+            throw new InvalidMeasurementValueException(volume);
+        }
+        return new Volume(volume, unit);
+    }
+
     public Outcome compare(Volume anotherVolume) {
-        if (this.toLiter() == anotherVolume.toLiter()) return Outcome.EQUAL;
-        if (this.toLiter() < anotherVolume.toLiter()) return Outcome.LESSER;
+        if (this.convertToBase() == anotherVolume.convertToBase()) return Outcome.EQUAL;
+        if (this.convertToBase() < anotherVolume.convertToBase()) return Outcome.LESSER;
         return Outcome.GREATER;
     }
 
-    private double toLiter() {
-        if (this.unit == VolumeUnit.GALLON) {
-            return this.volume * 3.80;
-        }
-        return this.volume;
+    private double convertToBase() {
+        return this.unit.convertToBaseUnit(this.volume);
     }
 
-    public Volume add(Volume anotherVolume) {
-        double sumOfVolumes = this.toLiter() + anotherVolume.toLiter();
-        return new Volume(sumOfVolumes,VolumeUnit.LITER);
+    public Volume add(Volume anotherVolume) throws InvalidMeasurementValueException {
+        double sumOfVolumes = this.convertToBase() + anotherVolume.convertToBase();
+        return createVolume(sumOfVolumes,VolumeUnit.LITER);
     }
 
     @Override

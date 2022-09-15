@@ -1,12 +1,12 @@
 package com.tw.step.assignment3;
 
 public class Length {
-    private double length;
-    private Unit unit;
+    private final double length;
+    private final LengthUnit lengthUnit;
 
-    public Length(double length,Unit unit) {
+    public Length(double length, LengthUnit lengthUnit) {
         this.length = length;
-        this.unit = unit;
+        this.lengthUnit = lengthUnit;
     }
 
     public Outcome compare(Length anotherLength) {
@@ -18,7 +18,7 @@ public class Length {
     }
 
     public double toMilliMeter() {
-        switch(unit){
+        switch(this.lengthUnit){
             case CM: return this.length * 10;
             case IN: return this.length * 25;
             case FT: return this.length * 300;

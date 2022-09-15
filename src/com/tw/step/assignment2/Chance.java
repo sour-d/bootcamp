@@ -1,31 +1,34 @@
 package com.tw.step.assignment2;
 
+import com.tw.step.assignment2.exception.InvalidChanceException;
+
 public class Chance {
     private final double chance;
 
-    public Chance(double chance) {
+    private Chance(double chance) {
         this.chance = chance;
     }
 
-    public double getChance() {
-        return this.chance;
+    public static Chance createChance(double chance) throws InvalidChanceException {
+        if (chance < 0 || chance > 1) {
+            throw new InvalidChanceException(chance);
+        }
+        return new Chance(chance);
     }
 
-    public Chance oppositeChance() {
-        return new Chance(1 - this.chance);
+    public Chance complement() throws InvalidChanceException {
+        return createChance(1 - this.chance);
     }
 
-    public static Chance chanceOfTwoConsecutiveChances(Chance chance1, Chance chance2) {
-        double finalChance = chance1.getChance() * chance2.getChance();
-        return new Chance(finalChance);
+    public Chance and(Chance anotherChance) throws InvalidChanceException {
+        double combinedChance = this.chance * anotherChance.chance;
+        return createChance(combinedChance);
     }
 
-    public static Chance chanceOfAtLeastChance(Chance chance1, Chance chance2) {
-        double probabilityOfFirstEvent = chance1.oppositeChance().getChance();
-        double probabilityOfSecondEvent = chance2.oppositeChance().getChance();
-
-        double finalChance = 1 - (probabilityOfFirstEvent * probabilityOfSecondEvent);
-        return new Chance(finalChance);
+    public Chance or(Chance anotherChance) throws InvalidChanceException {
+        return this.complement()
+                .and(anotherChance.complement())
+                .complement();
     }
 
     @Override
@@ -42,5 +45,9 @@ public class Chance {
     public int hashCode() {
         long temp = Double.doubleToLongBits(chance);
         return (int) (temp ^ (temp >>> 32));
+    }
+
+    public boolean isApprox(Chance anotherChance,double delta) {
+        return Math.abs(this.chance - anotherChance.chance) <= delta;
     }
 }

@@ -21,9 +21,9 @@ class ParkingLotTest {
     @Test
     void shouldGiveStatusOfSlotAvailability() {
         ParkingLot parkingLot = new ParkingLot(1);
-        assertFalse(parkingLot.isLotFull());
+        assertFalse(parkingLot.isFull());
 
         parkingLot.park();
-        assertTrue(parkingLot.isLotFull());
+        assertTrue(parkingLot.isFull());
     }
 }

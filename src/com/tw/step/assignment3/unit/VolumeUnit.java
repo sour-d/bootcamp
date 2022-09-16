@@ -1,6 +1,6 @@
-package com.tw.step.assignment3;
+package com.tw.step.assignment3.unit;
 
-public enum VolumeUnit {
+public enum VolumeUnit implements Unit {
     GALLON {
         @Override
         public double convertToBaseUnit(double volume) {
@@ -9,6 +9,7 @@ public enum VolumeUnit {
     },
     LITER;
 
+    @Override
     public double convertToBaseUnit(double volume){
         return volume;
     }

@@ -2,11 +2,17 @@ package com.tw.step.assignment3;
 
 import com.tw.step.assignment3.exception.InvalidMeasurementValueException;
 import com.tw.step.assignment3.exception.UnitMismatchException;
+import com.tw.step.assignment3.unit.LengthUnit;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class LengthTest {
+    @Test
+    void shouldThrowExceptionForInvalidLength() {
+        assertThrows(InvalidMeasurementValueException.class, ()->Length.createLength(-1,LengthUnit.IN));
+    }
+
     @Test
     void shouldCompareFeetAndInch() throws InvalidMeasurementValueException {
         Length feet = Length.createLength(1, LengthUnit.FT);

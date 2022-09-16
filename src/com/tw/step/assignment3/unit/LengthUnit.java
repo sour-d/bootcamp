@@ -1,6 +1,6 @@
-package com.tw.step.assignment3;
+package com.tw.step.assignment3.unit;
 
-public enum LengthUnit {
+public enum LengthUnit implements Unit {
     IN,
     FT {
         @Override
@@ -21,6 +21,7 @@ public enum LengthUnit {
         }
     };
 
+    @Override
     public double convertToBaseUnit(double length) {
         return length;
     }

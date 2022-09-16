@@ -1,6 +1,6 @@
-package com.tw.step.assignment3;
+package com.tw.step.assignment3.unit;
 
-public enum TemperatureUnit {
+public enum TemperatureUnit implements Unit {
     C,
     F{
         @Override
@@ -9,6 +9,7 @@ public enum TemperatureUnit {
         }
     };
 
+    @Override
     public double convertToBaseUnit(double temperature) {
         return temperature;
     }

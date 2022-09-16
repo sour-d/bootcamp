@@ -1,11 +1,18 @@
 package com.tw.step.assignment3;
 
 import com.tw.step.assignment3.exception.InvalidMeasurementValueException;
+import com.tw.step.assignment3.unit.LengthUnit;
+import com.tw.step.assignment3.unit.VolumeUnit;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class VolumeTest {
+    @Test
+    void shouldThrowExceptionForInvalidLength() {
+        assertThrows(InvalidMeasurementValueException.class, () -> Volume.createVolume(-1, VolumeUnit.GALLON));
+    }
+
     @Test
     void shouldCompareGallonAndLitre() throws InvalidMeasurementValueException {
         Volume gallon = Volume.createVolume(1, VolumeUnit.GALLON);
@@ -24,6 +31,6 @@ class VolumeTest {
         Volume liter = Volume.createVolume(1, VolumeUnit.LITER);
         Volume expected = Volume.createVolume(4.8, VolumeUnit.LITER);
 
-        assertEquals(expected,gallon.add(liter));
+        assertEquals(expected, gallon.add(liter));
     }
 }

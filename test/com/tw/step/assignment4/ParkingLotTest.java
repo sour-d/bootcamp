@@ -4,26 +4,26 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ParkingAreaTest {
+class ParkingLotTest {
     @Test
     void shouldPark() {
-        ParkingArea parkingArea = new ParkingArea(2);
-        assertEquals(ParkingStatus.PARKED, parkingArea.park());
+        ParkingLot parkingLot = new ParkingLot(2);
+        assertEquals(ParkingStatus.PARKED, parkingLot.park());
     }
 
     @Test
     void shouldNotParkIfSlotIsNotAvailable() {
-        ParkingArea parkingArea = new ParkingArea(1);
-        parkingArea.park();
-        assertEquals(ParkingStatus.NOT_PARKED,parkingArea.park());
+        ParkingLot parkingLot = new ParkingLot(1);
+        parkingLot.park();
+        assertEquals(ParkingStatus.NOT_PARKED, parkingLot.park());
     }
 
     @Test
     void shouldGiveStatusOfSlotAvailability() {
-        ParkingArea parkingArea = new ParkingArea(1);
-        assertFalse(parkingArea.isLotFull());
+        ParkingLot parkingLot = new ParkingLot(1);
+        assertFalse(parkingLot.isLotFull());
 
-        parkingArea.park();
-        assertTrue(parkingArea.isLotFull());
+        parkingLot.park();
+        assertTrue(parkingLot.isLotFull());
     }
 }

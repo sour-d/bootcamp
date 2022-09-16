@@ -1,10 +1,10 @@
 package com.tw.step.assignment4;
 
-public class ParkingArea {
+public class ParkingLot {
     private final int totalSlots;
     private int parkedSlots;
 
-    public ParkingArea(int totalSlots) {
+    public ParkingLot(int totalSlots) {
         this.totalSlots = totalSlots;
         this.parkedSlots = 0;
     }

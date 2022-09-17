@@ -7,7 +7,7 @@ public class Attendant implements Notifiable {
     private final Assistant assistant;
 
     public Attendant(Assistant assistant) {
-        this.parkingLots = new ArrayList<ParkingLot>();
+        this.parkingLots = new ArrayList<>();
         this.assistant = assistant;
     }
 
@@ -21,7 +21,6 @@ public class Attendant implements Notifiable {
             //  do something
             // return
         }
-        System.out.println("got a lot");
     }
 
     private int calculatePercentage(ParkingLot lot) {

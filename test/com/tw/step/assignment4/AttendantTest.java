@@ -2,9 +2,6 @@ package com.tw.step.assignment4;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -24,7 +21,7 @@ class AttendantTest {
 
     @Test
     void shouldParkACar() {
-        ParkingLot parkingLot1 = new ParkingLot(2);
+        ParkingLot parkingLot1 = new ParkingLot(1, 2);
         Attendant attendant = new Attendant(new Assistant());
 
         attendant.assign(parkingLot1);
@@ -34,7 +31,7 @@ class AttendantTest {
 
     @Test
     void shouldNotParkACarIfNoSlotAvailable() {
-        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot1 = new ParkingLot(1, 1);
         Attendant attendant = new Attendant(new Assistant());
 
         attendant.assign(parkingLot1);
@@ -45,7 +42,7 @@ class AttendantTest {
 
     @Test
     void determineIfProviderLotIsFull() {
-        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot1 = new ParkingLot(1, 1);
         Attendant attendant = new Attendant(new Assistant());
 
         attendant.assign(parkingLot1);

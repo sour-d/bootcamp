@@ -6,8 +6,10 @@ public class ParkingLot {
     private final int totalSlots;
     private int parkedSlots;
     private final ArrayList<Notifiable> notifiable;
+    private final int id;
 
-    public ParkingLot(int totalSlots) {
+    public ParkingLot(int id, int totalSlots) {
+        this.id = id;
         this.totalSlots = totalSlots;
         this.parkedSlots = 0;
         notifiable = new ArrayList<>();
@@ -30,7 +32,7 @@ public class ParkingLot {
         this.notifiable.add(notifiable);
     }
 
-    private void notifyEvent() {
+    protected void notifyEvent() {
         this.notifiable.forEach(notifiable -> notifiable.notifyEvent(this));
     }
 
@@ -41,5 +43,4 @@ public class ParkingLot {
     public int getParkedSlots() {
         return parkedSlots;
     }
-
 }

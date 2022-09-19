@@ -42,7 +42,20 @@ class BagTest {
     void shouldAddRedBallIfBagContainsGreen() throws ForbiddenBallColorException, BagLimitExceededException {
         Bag bag = new Bag(12);
         bag.addBall(new Ball(BallColor.GREEN));
-//        assertThrows(ForbiddenBallColorException.class, () -> bag.addBall(new Ball(BallColor.RED)));
         assertEquals(2, bag.addBall(new Ball(BallColor.RED)));
+    }
+
+    @Test
+    void shouldNotAddYellowBallIfBagIsEmpty() {
+        Bag bag = new Bag(12);
+        assertThrows(ForbiddenBallColorException.class, () -> bag.addBall(new Ball(BallColor.YELLOW)));
+    }
+
+    @Test
+    void shouldAddYellowBallIfBagContainsTwoOtherColoredBalls() throws ForbiddenBallColorException, BagLimitExceededException {
+        Bag bag = new Bag(12);
+        bag.addBall(new Ball(BallColor.GREEN));
+        bag.addBall(new Ball(BallColor.RED));
+        assertEquals(3, bag.addBall(new Ball(BallColor.YELLOW)));
     }
 }

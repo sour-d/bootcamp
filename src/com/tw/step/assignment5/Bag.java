@@ -41,10 +41,4 @@ public class Bag {
     private boolean isBagFull() {
         return this.balls.size() == maxBalls;
     }
-
-    private long countSameColoredBall(BallColor ballColor) {
-        return this.balls.stream()
-                .filter(ball -> ball.getColor() == ballColor)
-                .count();
-    }
 }

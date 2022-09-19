@@ -1,4 +1,4 @@
-package com.tw.step.assignment5.Execption;
+package com.tw.step.assignment5.execption;
 
 import com.tw.step.assignment5.Color;
 

@@ -15,13 +15,11 @@ public class Bag {
     }
 
     public int addBall(Ball ball) throws ColorLimitExceedException, BagLimitExceededException {
-        Color ballColor = ball.getColor();
-
-        if(this.balls.size() == maxBalls) {
+        if(this.isBagFull()) {
             throw new BagLimitExceededException(maxBalls);
         }
 
-        if (ball.colorLimit() == this.countColoredBall(ballColor)) {
+        if (isSameBallLimitExceeded(ball)) {
             throw new ColorLimitExceedException(ball.getColor());
         }
 
@@ -30,7 +28,16 @@ public class Bag {
 
     }
 
-    private long countColoredBall(Color ballColor) {
+    private boolean isSameBallLimitExceeded(Ball ball) {
+        Color ballColor = ball.getColor();
+        return ball.colorLimit() == this.countSameColoredBall(ballColor);
+    }
+
+    private boolean isBagFull() {
+        return this.balls.size() == maxBalls;
+    }
+
+    private long countSameColoredBall(Color ballColor) {
         return this.balls.stream()
                 .filter(ball -> ball.getColor() == ballColor)
                 .count();

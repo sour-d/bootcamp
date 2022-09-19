@@ -1,5 +1,7 @@
 package com.tw.step.assignment5;
 
+import com.tw.step.assignment5.Execption.ColorLimitExceedException;
+
 import java.util.HashSet;
 
 public class Bag {
@@ -10,8 +12,20 @@ public class Bag {
         this.balls = new HashSet<>();
     }
 
-    public boolean addBall(Ball ball){
+    public int addBall(Ball ball) throws ColorLimitExceedException {
+        Color ballColor = ball.getColor();
+
+        if (ball.colorLimit() == this.countColoredBall(ballColor)) {
+            throw new ColorLimitExceedException(ball.getColor());
+        }
         balls.add(ball);
-        return true;
+        return balls.size();
+
+    }
+
+    private long countColoredBall(Color ballColor) {
+        return this.balls.stream()
+                .filter(ball -> ball.getColor() == ballColor)
+                .count();
     }
 }

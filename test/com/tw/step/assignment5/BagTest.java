@@ -58,4 +58,34 @@ class BagTest {
         bag.addBall(new Ball(BallColor.RED));
         assertEquals(3, bag.addBall(new Ball(BallColor.YELLOW)));
     }
+
+    @Test
+    void shouldAddBlackBallIfBagIsEmpty() throws ForbiddenBallColorException, BagLimitExceededException {
+        Bag bag = new Bag(12);
+        assertEquals(1, bag.addBall(new Ball(BallColor.BLACK)));
+        assertEquals(2, bag.addBall(new Ball(BallColor.BLACK)));
+    }
+
+    @Test
+    void shouldAddBlueBallIfBagIsEmpty() throws ForbiddenBallColorException, BagLimitExceededException {
+        Bag bag = new Bag(12);
+        assertEquals(1, bag.addBall(new Ball(BallColor.BLUE)));
+        assertEquals(2, bag.addBall(new Ball(BallColor.BLUE)));
+    }
+
+    @Test
+    void shouldNotAddBlackBallIfBagContainsBlueBall() throws ForbiddenBallColorException, BagLimitExceededException {
+        Bag bag = new Bag(12);
+        bag.addBall(new Ball(BallColor.BLUE));
+
+        assertThrows(ForbiddenBallColorException.class, () -> bag.addBall(new Ball(BallColor.BLACK)));
+    }
+
+    @Test
+    void shouldNotAddBlueBallIfBagContainsBlackBall() throws ForbiddenBallColorException, BagLimitExceededException {
+        Bag bag = new Bag(12);
+        bag.addBall(new Ball(BallColor.BLACK));
+
+        assertThrows(ForbiddenBallColorException.class, () -> bag.addBall(new Ball(BallColor.BLUE)));
+    }
 }
